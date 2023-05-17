@@ -1,6 +1,6 @@
 # myfitness_app
 Contributed By:
-Jasmina Tropalovic
+Jasmina Topalovic
 Syrinthia Swift
 Jeremy Lehmann
 Jeffrey Smith
