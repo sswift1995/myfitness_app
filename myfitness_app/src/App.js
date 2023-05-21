@@ -22,7 +22,7 @@ const App = () => {
                 <Route path="/tracker/:id" element={<Tracker/>} />
                 
             </Routes>
-            <img class="center" style={{width: 1500, height: 850}} src ={home} alt ="Home Photo" />
+            <img className="center" style={{width: 1500, height: 850}} src ={home} alt ="Home Photo" />
             < ExerciseDetail/>
             <Footer />
         </div>
