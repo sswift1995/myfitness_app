@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar';
+
 
 
 
@@ -9,16 +9,16 @@ function About() {
 
         <section className="Team">
           <section className="Jasmina">
-            Jasmina - not gay
+            Jasmina
           </section>
           <section className="Jeff">
-            Jeff - gay
+            Jeff
           </section>
           <section className="Jeremy">
-            Jeremy - gay 
+            Jeremy
           </section>
           <section className="Syrinthia">
-            Syrinthia - gay
+            Syrinthia
           </section>
       </section>
 
