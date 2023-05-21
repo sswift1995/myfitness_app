@@ -6,6 +6,7 @@ const exercise_router= express.Router()
 //const  = require('../models/')
 
 
+
 // Seed
 exercise_router.get('/data/seed', (req, res) => {
     
