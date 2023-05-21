@@ -1,8 +1,19 @@
-import React from 'react'
+import React from 'react';
+import welcome from '../assets/welcome.png'
 
 const Home = () => {
     return (
-        <div>Home</div>
+        <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+        }}
+      >
+           
+        <img style= {{width: 1400, height: 1000}} src ={welcome} alt ="Home"  />
+        </div>
     )
 }
 

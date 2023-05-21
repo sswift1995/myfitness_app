@@ -8,6 +8,9 @@ import Food from "./Pages/Food";
 import Tracker from "./Pages/Tracker";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+
+
+
 import home from './assets/home.jpg';
 import About from './Pages/About';
 
@@ -32,7 +35,11 @@ const App = () => {
                 <Route path="/tracker/:id" element={<Tracker />} />
                 <Route path="/About" element={<About/>}/>
             </Routes>
+
+  
+
             <img class="center" style={{ width: 1500, height: 850 }} src={home} alt="Home Photo" />
+
 
             <Footer />
         </div>
