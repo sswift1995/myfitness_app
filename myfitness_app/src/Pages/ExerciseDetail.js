@@ -1,23 +1,26 @@
 import React from 'react'
 
-const APIKey = `65PdE6hoHk5ve+DgrUnuBg==gnhzdVxf0nHtjRnn`
-const endPoint = `https://api.api-ninjas.com/v1/exercises`
-let options = {
-    method: 'GET',
-    headers: { 'x-api-key': APIKey }
-  }
+const url = 'https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?muscle=biceps';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '48464c4febmsh0d1c7965060191ep11011bjsnd0dd7d1369e2',
+		'X-RapidAPI-Host': 'exercises-by-api-ninjas.p.rapidapi.com'
+	}
+};
 
-async function Exercise_data (endPoint, options) {
-const data = await fetch(endPoint)
-    .then((res) => res.json())
-    .then((data)=> console.log(data))
+try {
+	const response = await fetch(url, options);
+	const result = await response.json();
+	console.log(result);
+} catch (error) {
+	console.error(error);
 }
-
 const ExerciseDetail = () => {
     return (
         <div>
-            <button onClick={(e ) =>Exercise_data(e)}>
-                Search for Exercises
+            <button onClick={(e ) =>ExerciseDetail(e)}>
+                Search for Exercises:
              </button>
         </div>
     )
