@@ -83,3 +83,9 @@
     font-size: large;
     margin: 0px 20px;
   }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+
+  }
