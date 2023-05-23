@@ -17,11 +17,12 @@ const App = () => {
             <NavBar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/exercise/:id" element={<ExerciseDetail />} />
+                <Route path="/exercise" element={<ExerciseDetail />} />
                 <Route path="/food" element={<Food />} />
-                <Route path="/tracker/:id" element={<Tracker />} />
+                <Route path="/tracker" element={<Tracker />} />
             </Routes>
-            <img class="center" style={{ width: 1500, height: 850 }} src={home} alt="Home Photo" />
+            <img className="center" style={{ width: 1500, height: 850 }} src={home} alt="Home Photo" />
+            <ExerciseDetail />
             <Footer />
         </div>
     )
