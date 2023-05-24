@@ -3,7 +3,7 @@ import './Foot.css';
 import logo2 from '../assets/logo2.jpg'
 import About from "../Pages/About";
 
-
+// test comment
 function Footer() {
 
   return (
