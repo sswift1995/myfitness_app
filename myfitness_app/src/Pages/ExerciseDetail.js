@@ -31,11 +31,17 @@ const ExerciseDetail = () => {
 		<div>
 			<button onClick={exerciseData}>Search for Exercises</button>
 			{/* Render the fetched exercise data */}
-			<ul>
+			<div>
 				{exercises.map((exercise) => (
-					<li key={exercise.id}>{exercise.name}</li>
+					<div>
+						<h1>{exercise.name}</h1>
+						<img src={exercise.gifUrl} alt={exercise.name} />
+						<p>{exercise.target}</p>
+						<p>{exercise.equipment}</p>
+						<button>Save</button>
+					</div>
 				))}
-			</ul>
+			</div>
 		</div>
 	);
 };
