@@ -3,7 +3,7 @@ import './Foot.css';
 import logo2 from '../assets/logo2.jpg'
 import About from "../Pages/About";
 
-
+// test comment
 function Footer() {
 
   return (
@@ -11,28 +11,25 @@ function Footer() {
       <hr className="footer-seperator" />
       <section className="footer-social-media">
       </section>
-      <section className='logo'>
-        <img src={ logo2 } alt='fit_by_me_logo'></img>
-      </section>
       <section className="footer-info">
         <section className="footer-info-left">
-          <section className="footer-info__name">
-            &copy; 2023
-          </section>
+          <img src={logo2} alt='fit_by_me_logo'></img>
           <section className="footer-about_us">
           </section>
         </section>
         <section className="footer-info-center">
-          <section className="footer-info__terms">
-            <a href="mailto:test.user@sdsu.edu">Send us an email!</a>
-
-          </section>
+          <bold>TECHNOLOGIES USED:</bold>
+          <ul>
+            <li>JavaScript</li>
+            <li>CSS</li>
+            <li>API's</li>
+            <li>React</li>
+            <li>HTML</li>
+          </ul>
         </section>
         <section className="footer-info-right">
-          <section className="footer-info__number">
-            Handcrafted in San Diego, CA by Jasmina, Syrinthia, Jeremy and Jeff
+          Handcrafted in San Diego, CA by Jasmina, Syrinthia, Jeremy and Jeff
 
-          </section>
           <section className="footer-info__contact">
             <a href="/About">We are software development students at San Diego State University</a>
           </section>
@@ -45,6 +42,7 @@ function Footer() {
 
       </section>
       <hr className="footer-seperator" />
+      &copy; 2023
     </section>
 
   )
