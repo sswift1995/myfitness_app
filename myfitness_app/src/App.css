@@ -1,0 +1,14 @@
+body {
+    background-color: white;
+    font-family: 'Alegreya';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
+ 
+
+
+  ul {
+    list-style-type: none;
+  }
