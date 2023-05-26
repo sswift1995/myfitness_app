@@ -50,3 +50,6 @@ function Footer() {
 }
 
 export default Footer;
+
+// return this line under scripts in the package.json file if errors persist
+    // "start": "react-scripts start",
