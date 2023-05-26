@@ -20,7 +20,6 @@ const ExerciseDetail = () => {
 		try {
 			const response = await axios.get(url, options);
 			const data = response.data;
-			console.log(data);
 			setExercises(data); // Update the state with the received data
 		} catch (error) {
 			console.error(error);

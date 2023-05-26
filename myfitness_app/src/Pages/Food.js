@@ -32,10 +32,6 @@ const Food = () => {
         .then((res) => res.json())
         .then((data) => data)
 
-
-      console.log(data)
-
-
       setRecipe(data.hits)
     }
   }
@@ -63,7 +59,7 @@ const Food = () => {
       Fit by Me allows you to search from thousands of
       healthy recipes to <br />
       keep your
-       health journey on track and help you reach your goals.
+      health journey on track and help you reach your goals.
       <br />
       <br />
       Start by simply typing an ingredient or cuisine and get to cooking!
@@ -86,19 +82,19 @@ const Food = () => {
         />
 
 
-<button
-  onClick={(e) => recipeData(e)}
-  style={{
-    backgroundColor: 'white',
-    color: 'black',
-    padding: '10px 10px',
-    borderRadius: '5px',
-    border: '1px solid gray',
-    fontSize: '15px',
-  }}
->
-Yummy Hunt
-</button>
+        <button
+          onClick={(e) => recipeData(e)}
+          style={{
+            backgroundColor: 'white',
+            color: 'black',
+            padding: '10px 10px',
+            borderRadius: '5px',
+            border: '1px solid gray',
+            fontSize: '15px',
+          }}
+        >
+          Yummy Hunt
+        </button>
 
       </div>
       <div>
@@ -132,25 +128,27 @@ Yummy Hunt
 
 
             <button
-                style={{
-                  backgroundColor: 'lightgrey',
-                  color: 'black',
-                  padding: '10px 10px',
-                  borderRadius: '5px',
-                  border: '1px solid gray',
-                  fontSize: '15px',
-                  marginBottom: "15px"
-                }}
+              method="POST"
+              action="/food"
+              style={{
+                backgroundColor: 'lightgrey',
+                color: 'black',
+                padding: '10px 10px',
+                borderRadius: '5px',
+                border: '1px solid gray',
+                fontSize: '15px',
+                marginBottom: "15px"
+              }}
             >Save to my Tracker 😋</button>
 
 
 
           </div>
-          
+
         ))}
       </div>
       <div>
-      <img style={{ width: 1400, height: 800 }} src={cooking} alt="cooking" />
+        <img style={{ width: 1400, height: 800 }} src={cooking} alt="cooking" />
 
       </div>
     </div>
