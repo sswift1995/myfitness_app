@@ -9,10 +9,8 @@ import Tracker from "./Pages/Tracker";
 
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-
-import pageone from './assets/pageone.png';
-
-
+import AddExercise from "./Pages/AddExercise";
+import AddFood from "./Pages/AddFood";
 
 const App = () => {
     return (
@@ -23,6 +21,8 @@ const App = () => {
                 <Route path="/exercises" element={<ExerciseDetail />} />
                 <Route path="/food" element={<Food />} />
                 <Route path="/tracker" element={<Tracker />} />
+                <Route path="/exercises/add" element={<AddExercise />} />
+                <Route path="/food/add" element={<AddFood />} />
             </Routes>
             <Footer />
         </div>
