@@ -9,12 +9,12 @@ const Tracker = () => {
     <div className='Tracker'>
       <div>
         <Link to="/exercises/add">
-          <Button>Add Exercise</Button>
+          <Button variant="outlined" color="error">Add Exercise</Button>
         </Link>
       </div>
       <div>
         <Link to="/food/add">
-          <Button>Add Food</Button>
+          <Button variant="outlined" color="error">Add Food</Button>
         </Link>
       </div>
     </div>
