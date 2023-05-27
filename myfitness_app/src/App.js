@@ -11,7 +11,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 import pageone from './assets/pageone.png';
-import About from './Pages/About';
+
 
 
 const App = () => {
@@ -29,4 +29,4 @@ const App = () => {
     )
 }
 
-// export default App;
+export default App;

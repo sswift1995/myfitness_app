@@ -1,5 +1,6 @@
 import React from 'react'
 import './Tracker.css'
+import '//AddExercise.js'
 
 const Tracker = () => {
   return (

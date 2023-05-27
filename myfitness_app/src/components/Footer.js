@@ -1,7 +1,7 @@
 import React from 'react';
 import './Foot.css';
 import logo2 from '../assets/logo2.jpg'
-import About from "../Pages/About";
+
 
 // test comment
 function Footer() {
@@ -14,8 +14,7 @@ function Footer() {
       <section className="footer-info">
         <section className="footer-info-left">
           <img src={logo2} alt='fit_by_me_logo'></img>
-          <section className="footer-about_us">
-          </section>
+ 
         </section>
         <section className="footer-info-center">
           <bold>TECHNOLOGIES USED:</bold>
@@ -31,7 +30,7 @@ function Footer() {
           Handcrafted in San Diego, CA by Jasmina, Syrinthia, Jeremy and Jeff
 
           <section className="footer-info__contact">
-            <a href="/About">We are software development students at San Diego State University</a>
+            <h4>We are software development students at San Diego State University</h4>
           </section>
         </section>
         <section className='footer-social-media__icon'>
