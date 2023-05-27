@@ -1,16 +1,24 @@
 import React from 'react'
 import './Tracker.css'
-import AddExercise from './AddExercise'
-import AddFood from './AddFood'
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 const Tracker = () => {
   return (
     <div className='Tracker'>
-      <h3>Exercise Tracker</h3>
+      <div>
+        <Link to="/exercises/add">
+          <Button>Add Exercise</Button>
+        </Link>
+      </div>
+      <div>
+        <Link to="/food/add">
+          <Button>Add Food</Button>
+        </Link>
+      </div>
     </div>
   )
 
 }
-
 
 export default Tracker
