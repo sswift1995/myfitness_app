@@ -1,6 +1,7 @@
 import React from 'react'
 import './Tracker.css'
-import '//AddExercise.js'
+import AddExercise from './AddExercise'
+import AddFood from './AddFood'
 
 const Tracker = () => {
   return (
