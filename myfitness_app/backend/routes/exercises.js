@@ -12,14 +12,14 @@ router.route('/add').post((req, res) => {
   const duration = req.body.duration;
   const sets = req.body.sets;
   const reps = req.body.reps;
-  const mood = req.body.mood;
+  const exerciseMood = req.body.exerciseMood;
 
   const newExercise = new Exercise({
     name,
     duration,
     sets,
     reps,
-    mood
+    exerciseMood
   });
 
   newExercise.save()
