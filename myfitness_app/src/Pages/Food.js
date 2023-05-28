@@ -123,25 +123,6 @@ const Food = () => {
 
 
             <a href={recipe.recipe.url} target="_blank">Recipe</a>
-            <br />
-            <br />
-
-
-            <button
-              method="POST"
-              action="/food"
-              style={{
-                backgroundColor: 'lightgrey',
-                color: 'black',
-                padding: '10px 10px',
-                borderRadius: '5px',
-                border: '1px solid gray',
-                fontSize: '15px',
-                marginBottom: "15px"
-              }}
-            >Save to my Tracker 😋</button>
-
-
 
           </div>
 
