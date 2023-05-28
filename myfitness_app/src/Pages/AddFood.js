@@ -1,40 +1,54 @@
 import React, { useState } from 'react';
 
 const AddFood = () => {
-    const [foodData, setFoodData] = useState({
-        name: '',
-        duration: '',
-        sets: '',
-        reps: '',
-        mood: ''
-    });
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFoodData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        const data = {
+            name: formData.get('name'),
+            servingSize: formData.get('servingSize'),
+            calories: formData.get('calories'),
+            timeOfDay: formData.get('timeOfDay'),
+            mood: formData.get('mood')
+        };
+
+        fetch('http://localhost:3000/food/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error: ' + response.status)
+                }
+            })
+            .then((data) => {
+                console.log('Success: ', data);
+            })
+            .catch((error) => {
+                console.log('Error: ', error)
+            });
     };
-
-    //   const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     // Do something with the submitted exercise data
-    //     console.log(foodData);
-    //   };
 
     return (
         <div className='Tracker'>
-            <h3>Food Tracker</h3>
-            <form method='POST' action='/tracker'>
+            <h3>Add New Recipe</h3>
+            <form onSubmit={handleSubmit}>
                 <label>
                     Name:
                     <input
                         type='text'
                         name='name'
                         id="name"
-                        value={foodData.name}
-                        onChange={handleChange}
+                        required
                     />
                 </label>
                 <br />
@@ -44,8 +58,7 @@ const AddFood = () => {
                         type='text'
                         id="servingSize"
                         name='servingSize'
-                        value={foodData.duration}
-                        onChange={handleChange}
+                        required
                     />
                 </label>
                 <br />
@@ -55,8 +68,6 @@ const AddFood = () => {
                         type='text'
                         name='calories'
                         id="calories"
-                        value={foodData.sets}
-                        onChange={handleChange}
                     />
                 </label>
                 <br />
@@ -66,8 +77,6 @@ const AddFood = () => {
                         type='text'
                         name='timeOfDay'
                         id="timeOfDay"
-                        value={foodData.reps}
-                        onChange={handleChange}
                     />
                 </label>
                 <br />
@@ -77,8 +86,6 @@ const AddFood = () => {
                         type='text'
                         name='mood'
                         id="foodMood"
-                        value={foodData.foodMood}
-                        onChange={handleChange}
                     />
                 </label>
                 <br />

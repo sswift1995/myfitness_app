@@ -1,38 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const UpdateExercise = () => {
-  const navigate = useNavigate();
+const UpdateExercise = (data) => {
 
-  const [exerciseData, setExerciseData] = useState({
-    name: '',
-    duration: '',
-    sets: '',
-    reps: '',
-    mood: ''
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setExerciseData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Do something with the submitted exercise data (e.g., update the data using an API call)
-    console.log(exerciseData);
-    // Redirect to the desired route after updating the exercise data
-    navigate.push('/tracker'); // Replace '/exercise' with the appropriate route path
-  };
 
   return (
     <div>
       <h3>Update Exercise</h3>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form method="POST" action={`/exercises/${data.exercise.id}?_method=PUT`}>
+        <label htmlFor='name'>
           Name:
           <input
             type='text'

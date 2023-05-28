@@ -5,6 +5,15 @@ import { Button } from '@mui/material';
 
 
 const Tracker = () => {
+
+  // let foodFormatted = food.map((food) => {
+  //   return (
+  //     <div>
+  //       <h2>{food.name}</h2>
+  //     </div>
+  //   )
+  // })
+
   return (
     <div className='Tracker'>
       <div>
@@ -13,9 +22,15 @@ const Tracker = () => {
         </Link>
       </div>
       <div>
-        <Link to="/food/add">
+        <Link to="/foods/add">
           <Button variant="outlined" color="error">Add Food</Button>
         </Link>
+      </div>
+      <div>
+        <h1>Food</h1>
+        <div>
+
+        </div>
       </div>
     </div>
   )

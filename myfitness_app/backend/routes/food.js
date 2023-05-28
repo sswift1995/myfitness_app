@@ -1,14 +1,8 @@
-const router = require('express').Router();
-let Food = require('../models/food')
-
-router.route('/').get((req, res) => {
-    Food.find()
-        .then(food => res.json(food))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
+const foodRouter = require('express').Router();
+let Food = require('../models/foodModel')
 
 // Create Route
-router.route('/add').post((req, res) => {
+foodRouter.route('/add').post((req, res) => {
     const name = req.body.name;
     const servingSize = req.body.servingSize;
     const calories = req.body.calories;
@@ -28,9 +22,15 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+foodRouter.route('/').get((req, res) => {
+    Food.find()
+        .then(food => res.json(food))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // Update route
-router.put('/:id', (req, res) => {
-    db.Food.findByIdAndUpdate(req.params.id, req.body)
+foodRouter.put('/:id', (req, res) => {
+    Food.findByIdAndUpdate(req.params.id, req.body)
         .then(() => {
             res.redirect(`/food/${req.params.id}`)
         })
@@ -41,8 +41,8 @@ router.put('/:id', (req, res) => {
 })
 
 // Delete route
-router.delete('/:id', (req, res) => {
-    db.Food.findByIdAndDelete(req.params.id)
+foodRouter.delete('/:id', (req, res) => {
+    Food.findByIdAndDelete(req.params.id)
         .then(deletedFood => {
             res.redirect('/tracker')
         })
@@ -52,4 +52,4 @@ router.delete('/:id', (req, res) => {
         })
 })
 
-module.exports = router;
+module.exports = foodRouter;

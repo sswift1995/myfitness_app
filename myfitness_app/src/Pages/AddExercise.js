@@ -1,26 +1,41 @@
 import React, { useState } from 'react';
 
 const AddExercise = () => {
-  const [exerciseData, setExerciseData] = useState({
-    name: '',
-    duration: '',
-    sets: '',
-    reps: '',
-    mood: ''
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setExerciseData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Do something with the submitted exercise data
-    console.log(exerciseData);
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const data = {
+      name: formData.get('name'),
+      duration: formData.get('duration'),
+      sets: formData.get('sets'),
+      reps: formData.get('reps'),
+      mood: formData.get('mood')
+    };
+
+    fetch('http://localhost:3000/exercises/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error: ' + response.status)
+        }
+      })
+      .then((data) => {
+        console.log('Success: ', data);
+      })
+      .catch((error) => {
+        console.log('Error: ', error)
+      });
   };
 
   return (
@@ -32,8 +47,7 @@ const AddExercise = () => {
           <input
             type='text'
             name='name'
-            value={exerciseData.name}
-            onChange={handleChange}
+            id='name'
           />
         </label>
         <br />
@@ -42,8 +56,7 @@ const AddExercise = () => {
           <input
             type='text'
             name='duration'
-            value={exerciseData.duration}
-            onChange={handleChange}
+            id="duration"
           />
         </label>
         <br />
@@ -52,8 +65,7 @@ const AddExercise = () => {
           <input
             type='text'
             name='sets'
-            value={exerciseData.sets}
-            onChange={handleChange}
+            id="sets"
           />
         </label>
         <br />
@@ -62,8 +74,7 @@ const AddExercise = () => {
           <input
             type='text'
             name='reps'
-            value={exerciseData.reps}
-            onChange={handleChange}
+            id='reps'
           />
         </label>
         <br />
@@ -72,8 +83,7 @@ const AddExercise = () => {
           <input
             type='text'
             name='mood'
-            value={exerciseData.mood}
-            onChange={handleChange}
+            id="mood"
           />
         </label>
         <br />

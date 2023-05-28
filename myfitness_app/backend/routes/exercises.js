@@ -1,13 +1,13 @@
-const router = require('express').Router();
-let Exercise = require('../models/exercise')
+const exerciseRouter = require('express').Router();
+let Exercise = require('../models/exerciseModel')
 
-router.route('/').get((req, res) => {
+exerciseRouter.route('/').get((req, res) => {
   Exercise.find()
     .then(exercises => res.json(exercises))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
+exerciseRouter.route('/add').post((req, res) => {
   const name = req.body.name;
   const duration = req.body.duration;
   const sets = req.body.sets;
@@ -29,8 +29,8 @@ router.route('/add').post((req, res) => {
 
 //adding the edit route for exercises
 
-router.put('/:id', (req, res) => {
-  db.Place.findByIdAndUpdate(req.params.id, req.body)
+exerciseRouter.put('/:id', (req, res) => {
+  db.Exercise.findByIdAndUpdate(req.params.id, req.body)
     .then(() => {
       res.redirect(`/exercises/${req.params.id}`)
     })
@@ -42,7 +42,7 @@ router.put('/:id', (req, res) => {
 
 // delete route for exercises
 
-router.delete('/:id', (req, res) => {
+exerciseRouter.delete('/:id', (req, res) => {
   db.Place.findByIdAndDelete(req.params.id)
     .then(deletedPlace => {
       res.redirect('/exercises')
@@ -53,4 +53,4 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-module.exports = router;
+module.exports = exerciseRouter;

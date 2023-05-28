@@ -19,10 +19,10 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/exercises" element={<ExerciseDetail />} />
-                <Route path="/food" element={<Food />} />
+                <Route path="/recipes" element={<Food />} />
                 <Route path="/tracker" element={<Tracker />} />
                 <Route path="/exercises/add" element={<AddExercise />} />
-                <Route path="/food/add" element={<AddFood />} />
+                <Route path="/foods/add" element={<AddFood />} />
             </Routes>
             <Footer />
         </div>
