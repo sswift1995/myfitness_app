@@ -25,7 +25,7 @@ const AddFood = () => {
 
     return (
         <div className='Tracker'>
-            <h3>Food Tracker</h3>
+            <h3 style={{ marginRight: '150px', marginTop: '75px' }}>Food Tracker</h3>
             <form method='POST' action='/tracker'>
                 <label>
                     Name:
@@ -38,6 +38,7 @@ const AddFood = () => {
                     />
                 </label>
                 <br />
+                <br />
                 <label>
                     Serving Size:
                     <input
@@ -49,6 +50,7 @@ const AddFood = () => {
                     />
                 </label>
                 <br />
+                <br />
                 <label>
                     Calories:
                     <input
@@ -59,6 +61,7 @@ const AddFood = () => {
                         onChange={handleChange}
                     />
                 </label>
+                <br />  
                 <br />
                 <label>
                     Time of Day:
@@ -71,6 +74,7 @@ const AddFood = () => {
                     />
                 </label>
                 <br />
+                <br />
                 <label>
                     Mood:
                     <input
@@ -82,7 +86,19 @@ const AddFood = () => {
                     />
                 </label>
                 <br />
-                <button type='submit'>Submit</button>
+                <br />
+                <button type='submit'
+                      style={{
+                        backgroundColor: '#4285f4',
+                        color: '#fff',
+                        padding: '10px 20px',
+                        fontSize: '16px',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer'
+                    }}
+                
+                >Submit</button>
             </form>
         </div>
     );

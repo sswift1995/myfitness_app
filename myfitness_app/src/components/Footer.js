@@ -41,7 +41,7 @@ function Footer() {
 
       </section>
       <hr className="footer-seperator" />
-      &copy; 2023
+      <h7>&copy; 2023</h7>
     </section>
 
   )
