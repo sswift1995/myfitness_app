@@ -8,13 +8,13 @@ const Tracker = () => {
     <div className='Tracker'>
       <div style={{ marginBottom: '100px' }}>
         <div className='addExerciseButton'><Link to="/exercises/add">
-          <Button variant="outlined" color="primary">Add Exercise</Button>
+          <Button variant="contained" color="primary">Add Exercise</Button>
         </Link>
       </div>
       </div>
       <div>
         <Link to="/food/add">
-          <Button variant="outlined" color="primary">Add Food</Button>
+          <Button variant="contained" color="primary">Add Food</Button>
         </Link>
       </div>
     </div>

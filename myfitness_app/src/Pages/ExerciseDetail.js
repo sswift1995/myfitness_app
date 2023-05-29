@@ -48,7 +48,7 @@ const ExerciseDetail = () => {
 				}}
 				onClick={(e) => exerciseData(e)}
 			>
-				Search for Exercises
+				View All Exercises
 			</button>
 			<div>
 				{exercises.map((exercise) => (
