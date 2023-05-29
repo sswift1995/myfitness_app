@@ -27,9 +27,29 @@ const ExerciseDetail = () => {
 	}
 
 	return (
-		<div>
-			<button onClick={exerciseData}>Search for Exercises</button>
-			{/* Render the fetched exercise data */}
+		<div
+			style={{
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+				height: '10vh',
+				marginBottom: '10vh',
+			}}
+		>
+			<button
+				style={{
+					backgroundColor: '#4285f4',
+					color: '#fff',
+					padding: '10px 20px',
+					fontSize: '16px',
+					border: 'none',
+					borderRadius: '4px',
+					cursor: 'pointer'
+				}}
+				onClick={(e) => exerciseData(e)}
+			>
+				Search for Exercises
+			</button>
 			<div>
 				{exercises.map((exercise) => (
 					<div>

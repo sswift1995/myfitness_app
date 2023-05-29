@@ -82,6 +82,7 @@ const AddFood = () => {
                     />
                 </label>
                 <br />
+                <br />
                 <button type='submit'>Submit</button>
             </form>
         </div>

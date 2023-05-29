@@ -50,7 +50,7 @@ const Food = () => {
   return (
     <div style={{
       padding: '10px',
-      fontSize: '30px',
+      fontSize: '18px',
       textAlign: 'center',
       marginTop: '20px',
       marginBottom: '20px',
@@ -85,12 +85,13 @@ const Food = () => {
         <button
           onClick={(e) => recipeData(e)}
           style={{
-            backgroundColor: 'white',
-            color: 'black',
+            backgroundColor: '#4285f4',
+            color: '#fff',
             padding: '10px 10px',
-            borderRadius: '5px',
-            border: '1px solid gray',
+            borderRadius: '4px',
+            border: 'none',
             fontSize: '15px',
+            cursor: 'pointer',
           }}
         >
           Yummy Hunt
