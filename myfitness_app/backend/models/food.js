@@ -6,6 +6,10 @@ const foodSchema = new Schema({
         type: String,
         required: true
     },
+    date: {
+        type: Date,
+        required: true
+    },
     servingSize: {
         type: Number,
         required: true
@@ -21,8 +25,8 @@ const foodSchema = new Schema({
     mood: {
         type: String,
         required: false
-    }
-})
+    },
+}, { collection: "foods" });
 
 const Food = mongoose.model('Food', foodSchema)
 

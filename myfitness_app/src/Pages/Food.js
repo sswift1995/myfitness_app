@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import cooking from '../assets/cooking.jpeg'
+import { Button } from '@mui/material';
 
 
 const Food = () => {
@@ -82,19 +83,11 @@ const Food = () => {
         />
 
 
-        <button
+        <Button
+          variant="outlined"
+          color="error"
           onClick={(e) => recipeData(e)}
-          style={{
-            backgroundColor: 'white',
-            color: 'black',
-            padding: '10px 10px',
-            borderRadius: '5px',
-            border: '1px solid gray',
-            fontSize: '15px',
-          }}
-        >
-          Yummy Hunt
-        </button>
+        >Yummy hunt</Button>
 
       </div>
       <div>

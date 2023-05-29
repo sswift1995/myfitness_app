@@ -1,25 +1,155 @@
-import React from 'react'
-import './Tracker.css'
-import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import './Tracker.css';
+import { Link, useParams } from 'react-router-dom';
+import { Button, Box, Typography, Grid } from '@mui/material';
 
 
 const Tracker = () => {
-  return (
-    <div className='Tracker'>
-      <div>
-        <Link to="/exercises/add">
-          <Button variant="outlined" color="error">Add Exercise</Button>
-        </Link>
-      </div>
-      <div>
-        <Link to="/food/add">
-          <Button variant="outlined" color="error">Add Food</Button>
-        </Link>
-      </div>
-    </div>
-  )
 
+  const [foods, setFoods] = useState([]);
+  const [exercises, setExercises] = useState([]);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}/${month}/${day}`;
+  }
+
+  const { id } = useParams();
+
+  const handleDelete = (type, itemId) => {
+    console.log('Deleting ', type, 'with id: ', itemId)
+
+    const url = type === 'exercise'
+      ? `http://localhost:3000/exercises/${itemId}`
+      : `http://localhost:3000/food/${itemId}`;
+
+    fetch(url, { method: 'DELETE' })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error deleting ${type}`);
+        }
+
+        // Update the corresponding state after successful deletion
+        if (type === 'exercise') {
+          setExercises(prevExercises => prevExercises.filter(ex => ex.id !== itemId));
+        } else if (type === 'food') {
+          setFoods(prevFoods => prevFoods.filter(food => food.id !== itemId));
+        }
+      })
+      .catch(error => console.log(`Error deleting ${type}: `, error));
+  }
+
+  useEffect(() => {
+    fetch('http://localhost:3000/food')
+      .then(response => response.json())
+      .then(data => setFoods(
+        data.map(food => ({ ...food, id: food._id }))
+      ))
+      .catch(error => console.log('Error fetching food data: ', error));
+
+    fetch('http://localhost:3000/exercises')
+      .then(response => response.json())
+      .then(data => setExercises(
+        data.map(exercise => ({ ...exercise, id: exercise._id }))
+      ))
+      .catch(error => console.log('Error fetching exercise data: ', error));
+  }, []);
+
+  return (
+    <div>
+
+      <Box display="flex" justifyContent="space-between" marginBottom="20px">
+        <div>
+          <Link to="/foods/add">
+            <Button variant="outlined" color="error">Add Food</Button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/exercises/add">
+            <Button variant="outlined" color="error">Add Exercise</Button>
+          </Link>
+        </div>
+      </Box>
+
+      <Grid container spacing={4}>
+
+        <Grid item xs={12} sm={6}>
+          <div style={{ padding: "50px" }}>
+            <Typography variant="h4" component="h1" gutterBottom>Food</Typography>
+
+            {/* Render the food data */}
+            {foods.map(food => (
+              <Box key={food.id} marginBottom="20px">
+                <Typography variant="h5" component="h2">{food.name}</Typography>
+                <Typography>Date: {formatDate(food.date)}</Typography>
+                <Typography>Serving(s): {food.servingSize}</Typography>
+                <Typography>Calories: {food.calories}</Typography>
+                <Typography>Time of day: {food.timeOfDay}</Typography>
+                <Typography>Mood: {food.mood}</Typography>
+
+                {/* Update button */}
+                <Button
+                  size='small'
+                  color="error"
+                  type='submit'
+                  onClick={() => handleDelete('food', food.id)}
+                >
+                  Delete
+                </Button>
+
+                {/* Edit button */}
+                <Link to={`/food/edit/${food.id}`}>
+                  <Button size='small' color="error">Edit</Button>
+                </Link>
+
+              </Box>
+            ))}
+          </div>
+
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <div style={{ padding: "50px" }}>
+            <Typography variant="h4" component="h1" gutterBottom>Exercises</Typography>
+
+            {/* Render the exercise data */}
+            {exercises.map(exercise => {
+              console.log(exercise)
+              return (
+                <Box key={exercise.id} marginBottom="20px">
+                  <Typography variant="h5" component="h2">{exercise.name}</Typography>
+                  <Typography>Date: {formatDate(exercise.date)}</Typography>
+                  <Typography>Duration: {exercise.duration} minutes</Typography>
+                  <Typography>Sets: {exercise.sets}</Typography>
+                  <Typography>Reps: {exercise.reps}</Typography>
+                  <Typography>Mood: {exercise.mood}</Typography>
+
+                  {/* Delete button */}
+                  <Button
+                    size='small'
+                    color="error"
+                    type='submit'
+                    onClick={() => handleDelete('exercise', exercise.id)}
+                  >
+                    Delete
+                  </Button>
+
+                  {/* Edit button */}
+                  <Link to={`/exercise/edit/${exercise.id}`}>
+                    <Button size='small' color="error">Edit</Button>
+                  </Link>
+
+                </Box>
+              );
+            })}
+          </div>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }
 
-export default Tracker
+export default Tracker;

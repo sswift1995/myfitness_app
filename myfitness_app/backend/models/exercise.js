@@ -6,6 +6,10 @@ const exerciseSchema = new Schema({
         type: String,
         required: true
     },
+    date: {
+        type: Date,
+        required: true
+    },
     duration: {
         type: Number,
         required: true
@@ -22,7 +26,7 @@ const exerciseSchema = new Schema({
         type: String,
         required: false
     }
-})
+}, { collection: 'exercises' });
 
 const Exercise = mongoose.model('Exercise', exerciseSchema);
 

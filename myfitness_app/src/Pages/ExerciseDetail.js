@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Button, Grid, Box } from '@mui/material';
 
 const ExerciseDetail = () => {
 
@@ -27,21 +28,31 @@ const ExerciseDetail = () => {
 	}
 
 	return (
-		<div>
-			<button onClick={exerciseData}>Search for Exercises</button>
+		<Box display="flex" flexDirection="column" alignItems="center">
+			<Button variant="outlined" color="error" onClick={exerciseData}>
+				Search for Exercises
+			</Button>
+
 			{/* Render the fetched exercise data */}
-			<div>
-				{exercises.map((exercise) => (
-					<div>
-						<h1>{exercise.name}</h1>
-						<img src={exercise.gifUrl} alt={exercise.name} />
-						<p>{exercise.target}</p>
-						<p>{exercise.equipment}</p>
-						<button>Save</button>
-					</div>
-				))}
-			</div>
-		</div>
+			<Box mt={2} display="flex" justifyContent="center">
+				<Box maxWidth='2000px' width='100%'>
+					<Grid container spacing={2}>
+						{exercises.map((exercise) => (
+							<Grid item xs={12} sm={6} md={4} key={exercise.id}>
+								<div>
+									<h1>{exercise.name}</h1>
+									<img src={exercise.gifUrl} alt={exercise.name} />
+									<p>{exercise.target}</p>
+									<p>{exercise.equipment}</p>
+									<button>Save</button>
+								</div>
+							</Grid>
+						))}
+					</Grid>
+				</Box>
+			</Box>
+		</Box>
 	);
 };
+
 export default ExerciseDetail;
