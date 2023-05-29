@@ -1,99 +1,119 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { TextField, Button } from '@mui/material';
 
 const AddExercise = () => {
-  const [exerciseData, setExerciseData] = useState({
-    name: '',
-    duration: '',
-    sets: '',
-    reps: '',
-    mood: ''
-  });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setExerciseData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
-  };
+  const navigate = useNavigate();
+
+  const [date, setDate] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Do something with the submitted exercise data
-    console.log(exerciseData);
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const data = {
+      name: formData.get('name'),
+      date: formData.get('date'),
+      duration: formData.get('duration'),
+      sets: formData.get('sets'),
+      reps: formData.get('reps'),
+      mood: formData.get('mood')
+    };
+
+    fetch('http://localhost:3000/exercises/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          navigate('/tracker');
+        } else {
+          throw new Error('Error: ' + response.status)
+        }
+      })
+      .then((data) => {
+        console.log('Success: ', data);
+      })
+      .catch((error) => {
+        console.log('Error: ', error)
+      });
+  };
+
+  const handleDateChange = (event) => {
+    const inputDate = event.target.value;
+    // Remove slashes from input date
+    const formattedDate = inputDate.replace(/\//g, '');
+    // Add slashes to the formatted date
+    const displayDate = formattedDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1/$2/$3');
+    setDate(displayDate);
   };
 
   return (
-    <div className='Tracker'>
-      <h3 style={{ marginRight: '150px', marginTop: '75px' }}>Exercise Tracker</h3>
+    <div style={{ padding: "50px" }}>
+      <h3>Add an exercise</h3>
       <form onSubmit={handleSubmit}>
-      <label style={{ marginBottom: '10px' }}>
-          Name:
-          <input
-            type='text'
-            name='name'
-            value={exerciseData.name}
-            onChange={handleChange}
-          />
-        </label>
+        <p><em>Fields with * are required</em></p>
+        <TextField
+          type='text'
+          name='name'
+          id='name'
+          label='Name'
+          variant='standard'
+          required
+        />
+        <br />
+        <TextField
+          type='text'
+          name='date'
+          id='date'
+          label='Date (YYYY/MM/DD)'
+          variant='standard'
+          value={date}
+          onChange={handleDateChange}
+          required
+        />
+        <br />
+        <TextField
+          type='text'
+          name='duration'
+          id='duration'
+          label='Duration'
+          variant='standard'
+          required
+        />
+        <br />
+        <TextField
+          type='text'
+          name='sets'
+          id='sets'
+          label='Sets'
+          variant='standard'
+        />
+        <br />
+        <TextField
+          type='text'
+          name='reps'
+          id='reps'
+          label='Reps'
+          variant='standard'
+        />
+        <br />
+        <TextField
+          type='text'
+          name='mood'
+          id='mood'
+          label='Mood'
+          variant='standard'
+        />
         <br />
         <br />
-        <label style={{ marginBottom: '10px' }}>
-          Duration:
-          <input
-            type='text'
-            name='duration'
-            value={exerciseData.duration}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <br />
-        <label>
-          Sets:
-          <input
-            type='text'
-            name='sets'
-            value={exerciseData.sets}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <br />
-        <label>
-          Reps:
-          <input
-            type='text'
-            name='reps'
-            value={exerciseData.reps}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <br />
-        <label>
-          Mood:
-          <input
-            type='text'
-            name='mood'
-            value={exerciseData.mood}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <br />
-        <button type='submit'
-        style={{
-					backgroundColor: '#4285f4',
-					color: '#fff',
-					padding: '10px 20px',
-					fontSize: '16px',
-					border: 'none',
-					borderRadius: '4px',
-					cursor: 'pointer'
-				}}
-        
-        >Submit</button>
+        <Button variant="outlined" color="error" type='submit'>Add Exercise</Button>
       </form>
     </div>
   );

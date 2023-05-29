@@ -1,88 +1,138 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { TextField, Button } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const UpdateExercise = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  const [exerciseData, setExerciseData] = useState({
+  const [exercise, setExercise] = useState({
     name: '',
+    date: '',
     duration: '',
     sets: '',
     reps: '',
     mood: ''
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setExerciseData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
-  };
+  useEffect(() => {
+    console.log('Exercise ID: ', id)
+    fetch(`http://localhost:3000/exercises/${id}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(data => {
+        setExercise({ ...data, id: data._id });
+      })
+      .catch(error => console.log('Error fetching exercise data: ', error));
+  }, [id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Do something with the submitted exercise data (e.g., update the data using an API call)
-    console.log(exerciseData);
-    // Redirect to the desired route after updating the exercise data
-    navigate.push('/tracker'); // Replace '/exercise' with the appropriate route path
+
+    const UpdatedExercise = { ...exercise, id: id };
+
+    fetch(`http://localhost:3000/exercises/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(UpdatedExercise),
+    })
+      .then((response) => {
+        if (response.ok) {
+          navigate('/tracker');
+        } else {
+          throw new Error('Error: ' + response.status);
+        }
+      })
+      .catch((error) => {
+        console.log('Error: ', error);
+      });
+    navigate('/tracker')
+  };
+
+  const handleChange = (event) => {
+    setExercise((prevExercise) => ({
+      ...prevExercise,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   return (
-    <div>
-      <h3>Update Exercise</h3>
+    <div style={{ padding: '50px' }}>
+      <h3>Edit an exercise</h3>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type='text'
-            name='name'
-            value={exerciseData.name}
-            onChange={handleChange}
-          />
-        </label>
+        <p>
+          <em>Fields with * are required</em>
+        </p>
+        <TextField
+          type="text"
+          name="name"
+          id="name"
+          label="Name"
+          variant="standard"
+          required
+          value={exercise.name}
+          onChange={handleChange}
+        />
         <br />
-        <label>
-          Duration:
-          <input
-            type='text'
-            name='duration'
-            value={exerciseData.duration}
-            onChange={handleChange}
-          />
-        </label>
+        <TextField
+          type="text"
+          name="date"
+          id="date"
+          label="Date (YYYY/MM/DD)"
+          variant="standard"
+          required
+          value={exercise.date}
+          onChange={handleChange}
+        />
         <br />
-        <label>
-          Sets:
-          <input
-            type='text'
-            name='sets'
-            value={exerciseData.sets}
-            onChange={handleChange}
-          />
-        </label>
+        <TextField
+          type="text"
+          name="duration"
+          id="duration"
+          label="Duration"
+          variant="standard"
+          required
+          value={exercise.duration}
+          onChange={handleChange}
+        />
         <br />
-        <label>
-          Reps:
-          <input
-            type='text'
-            name='reps'
-            value={exerciseData.reps}
-            onChange={handleChange}
-          />
-        </label>
+        <TextField
+          type="text"
+          name="sets"
+          id="sets"
+          label="Sets"
+          variant="standard"
+          value={exercise.sets}
+          onChange={handleChange}
+        />
         <br />
-        <label>
-          Mood:
-          <input
-            type='text'
-            name='mood'
-            value={exerciseData.mood}
-            onChange={handleChange}
-          />
-        </label>
+        <TextField
+          type="text"
+          name="reps"
+          id="reps"
+          label="Reps"
+          variant="standard"
+          value={exercise.reps}
+          onChange={handleChange}
+        />
         <br />
-        <button type='submit'>Submit</button>
+        <TextField
+          type="text"
+          name="mood"
+          id="mood"
+          label="Mood"
+          variant="standard"
+          value={exercise.mood}
+          onChange={handleChange}
+        />
+        <br />
+        <br />
+        <Button variant="outlined" color="error" type="submit">
+          Add Exercise
+        </Button>
       </form>
     </div>
   );

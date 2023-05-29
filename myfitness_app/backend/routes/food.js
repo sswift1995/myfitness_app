@@ -1,26 +1,91 @@
-const router = require('express').Router();
+const foodRouter = require('express').Router();
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Types.ObjectId
 let Food = require('../models/food')
 
-router.route('/').get((req, res) => {
+// Get route for a specific ID
+foodRouter.get('/:id', (req, res) => {
+    const foodId = req.params.id;
+
+    if (!ObjectId.isValid(foodId)) {
+        return res.status(400).json('Invalid food ID');
+    }
+
+    Food.findById(foodId)
+        .then(food => {
+            if (food) {
+                res.json(food);
+            } else {
+                res.status(404).json('Food not found');
+            }
+        })
+        .catch(error => {
+            console.log('Error:', error);
+            res.status(500).json('Error fetching food');
+        });
+});
+
+//adding the edit route for exercises
+foodRouter.put('/:id', (req, res) => {
+    const foodId = req.params.id;
+
+    if (!ObjectId.isValid(foodId)) {
+        return res.status(400).json('Invalid food ID');
+    }
+
+    Food.findByIdAndUpdate(foodId, req.body, { new: true })
+        .then(editedFood => {
+            if (editedFood) {
+                res.json('Food edited!');
+            } else {
+                res.status(404).json('Food not found');
+            }
+        })
+        .catch(error => {
+            console.log('Error:', error);
+            res.status(500).json('Error editing food');
+        });
+});
+
+// delete route for exercises
+foodRouter.delete('/:id', (req, res) => {
+    Food.findByIdAndDelete(req.params.id)
+        .then(deletedFood => {
+            if (deletedFood) {
+                res.json('Food deleted!');
+            } else {
+                res.status(404).json('Food not found');
+            }
+        })
+        .catch(err => {
+            console.log('error', err);
+            res.status(500).json('Error deleting food');
+        });
+})
+
+//Index route
+foodRouter.route('/').get((req, res) => {
     Food.find()
         .then(food => res.json(food))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// Create Route
-router.route('/add').post((req, res) => {
+//Add route
+foodRouter.route('/add').post((req, res) => {
     const name = req.body.name;
+    const date = req.body.date;
     const servingSize = req.body.servingSize;
     const calories = req.body.calories;
     const timeOfDay = req.body.timeOfDay;
-    const foodMood = req.body.foodMood;
+    const mood = req.body.mood;
 
     const newFood = new Food({
         name,
+        date,
         servingSize,
         calories,
         timeOfDay,
-        foodMood
+        mood
     });
 
     newFood.save()
@@ -28,28 +93,35 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// Update route
-router.put('/:id', (req, res) => {
-    db.Food.findByIdAndUpdate(req.params.id, req.body)
+foodRouter.route('/').get((req, res) => {
+    Food.find()
+        .then(food => res.json(food))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// Create Route
+foodRouter.route('/add').post((req, res) => {
+    const name = req.body.name;
+    const date = req.body.date;
+    const servingSize = req.body.servingSize;
+    const calories = req.body.calories;
+    const timeOfDay = req.body.timeOfDay;
+    const mood = req.body.mood;
+
+    const newFood = new Food({
+        name,
+        date,
+        servingSize,
+        calories,
+        timeOfDay,
+        mood
+    });
+
+    newFood.save()
         .then(() => {
-            res.redirect(`/food/${req.params.id}`)
+            res.json('Food added!')
         })
-        .catch(err => {
-            console.log('error', err)
-            res.render('error 404')
-        })
-})
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
-// Delete route
-router.delete('/:id', (req, res) => {
-    db.Food.findByIdAndDelete(req.params.id)
-        .then(deletedFood => {
-            res.redirect('/tracker')
-        })
-        .catch(err => {
-            console.log('error: ', err)
-            res.render("error 404")
-        })
-})
-
-module.exports = router;
+module.exports = foodRouter;

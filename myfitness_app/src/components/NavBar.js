@@ -26,7 +26,7 @@ const NavBar = () => (
 
       <Link to="/exercises" element={<ExerciseDetail />} style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Exercises</Link>
 
-      <Link to="/food" element={<Food />} style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Food</Link>
+      <Link to="/recipes" element={<Food />} style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Food</Link>
 
       <Link to="/tracker" element={<Tracker />} style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Tracker</Link>
 
