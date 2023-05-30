@@ -33,17 +33,24 @@ exerciseRouter.put('/:id', (req, res) => {
     return res.status(400).json('Invalid exercise ID');
   }
 
-  Exercise.findByIdAndUpdate(exerciseId, req.body, { new: true })
-    .then(editedExercise => {
-      if (editedExercise) {
-        res.json('Exercise edited!');
-      } else {
-        res.status(404).json('Exercise not found');
-      }
+  Exercise.findByIdAndUpdate(
+    req.params.id,
+    {
+      name: req.body.name,
+      date: new Date(req.body.date),
+      duration: req.body.duration,
+      sets: req.body.sets,
+      reps: req.body.reps,
+      mood: req.body.mood
+    },
+    { new: true }
+  )
+    .then(updatedExercise => {
+      res.json(updatedExercise);
     })
     .catch(error => {
-      console.log('Error:', error);
-      res.status(500).json('Error editing exercise');
+      console.error('Error updating exercise:', error);
+      res.status(500).send('Error updating exercise');
     });
 });
 

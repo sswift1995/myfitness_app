@@ -11,7 +11,7 @@ import AddFood from "./Pages/AddFood";
 import UpdateExercise from "./Pages/UpdateExercise";
 import UpdateFood from './Pages/UpdateFood';
 
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 const App = ({ id }) => {
     return (

@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import { TextField, Button, InputAdornment } from '@mui/material';
+import EventIcon from '@mui/icons-material/Event';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { parseISO } from 'date-fns';
 
 const UpdateExercise = () => {
+
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const [selectedDate, setSelectedDate] = useState('');
 
   const [exercise, setExercise] = useState({
     name: '',
@@ -15,6 +22,30 @@ const UpdateExercise = () => {
     mood: ''
   });
 
+  const handleNameChange = (event) => {
+    const { value } = event.target;
+    setExercise((prevExercise) => ({
+      ...prevExercise,
+      name: value,
+    }));
+  };
+
+  const handleDateChange = (date) => {
+    const selectedDateWithoutTime = date ? new Date(date.getFullYear(), date.getMonth(), date.getDate()) : null;
+    setSelectedDate(selectedDateWithoutTime);
+    setExercise((prevExercise) => ({
+      ...prevExercise,
+      date: selectedDateWithoutTime ? selectedDateWithoutTime.toISOString() : '',
+    }));
+  };
+
+  const handleChange = (event) => {
+    setExercise((prevExercise) => ({
+      ...prevExercise,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
   useEffect(() => {
     console.log('Exercise ID: ', id)
     fetch(`http://localhost:3000/exercises/${id}`, {
@@ -23,6 +54,7 @@ const UpdateExercise = () => {
       .then(response => response.json())
       .then(data => {
         setExercise({ ...data, id: data._id });
+        setSelectedDate(parseISO(data.date.substring(0, 10)));
       })
       .catch(error => console.log('Error fetching exercise data: ', error));
   }, [id]);
@@ -52,13 +84,6 @@ const UpdateExercise = () => {
     navigate('/tracker')
   };
 
-  const handleChange = (event) => {
-    setExercise((prevExercise) => ({
-      ...prevExercise,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
   return (
     <div style={{ padding: '50px' }}>
       <h3>Edit an exercise</h3>
@@ -72,21 +97,38 @@ const UpdateExercise = () => {
           id="name"
           label="Name"
           variant="standard"
+          sx={{ width: '230px', height: '56px' }}
           required
           value={exercise.name}
-          onChange={handleChange}
+          onChange={handleNameChange}
         />
         <br />
-        <TextField
-          type="text"
-          name="date"
-          id="date"
-          label="Date (YYYY/MM/DD)"
-          variant="standard"
-          required
-          value={exercise.date}
-          onChange={handleChange}
-        />
+        <br />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Date"
+            value={selectedDate}
+            onChange={handleDateChange}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                name="date"
+                id="date"
+                variant="standard"
+                required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <EventIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                value={selectedDate ? selectedDate.toISOString().slice(0, 10) : ''}
+                sx={{ width: '200px', height: '56px' }}
+              />
+            )}
+          />
+        </LocalizationProvider>
         <br />
         <TextField
           type="text"
@@ -94,6 +136,7 @@ const UpdateExercise = () => {
           id="duration"
           label="Duration"
           variant="standard"
+          sx={{ width: '230px', height: '56px' }}
           required
           value={exercise.duration}
           onChange={handleChange}
@@ -105,6 +148,7 @@ const UpdateExercise = () => {
           id="sets"
           label="Sets"
           variant="standard"
+          sx={{ width: '230px', height: '56px' }}
           value={exercise.sets}
           onChange={handleChange}
         />
@@ -115,6 +159,7 @@ const UpdateExercise = () => {
           id="reps"
           label="Reps"
           variant="standard"
+          sx={{ width: '230px', height: '56px' }}
           value={exercise.reps}
           onChange={handleChange}
         />
@@ -125,13 +170,14 @@ const UpdateExercise = () => {
           id="mood"
           label="Mood"
           variant="standard"
+          sx={{ width: '230px', height: '56px' }}
           value={exercise.mood}
           onChange={handleChange}
         />
         <br />
         <br />
-        <Button variant="outlined" color="error" type="submit">
-          Add Exercise
+        <Button sx={{ width: '230px', height: '56px' }} variant="outlined" color="error" type="submit">
+          Edit Exercise
         </Button>
       </form>
     </div>

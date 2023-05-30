@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import cooking from '../assets/cooking.jpeg'
-import { Button } from '@mui/material';
+import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
 
 
 const Food = () => {
@@ -20,7 +20,7 @@ const Food = () => {
   const appKEY = "07ed8726d6dc92538a20d5f0333bf7d9"
 
 
-  const endpoint = `https://api.edamam.com/search?q=${form.recipe}&app_id=${appID}&from=0&to=10&app_key=${appKEY}`
+  const endpoint = `https://api.edamam.com/search?q=${form.recipe}&app_id=${appID}&from=0&to=100&app_key=${appKEY}`
 
 
   async function recipeData(e) {
@@ -48,6 +48,7 @@ const Food = () => {
     }
   }
 
+
   return (
     <div style={{
       padding: '10px',
@@ -57,10 +58,9 @@ const Food = () => {
       marginBottom: '20px',
       maxWidth: '1200px'
     }}>
-      Fit by Me allows you to search from thousands of
-      healthy recipes to <br />
-      keep your
-      health journey on track and help you reach your goals.
+      Fit by Me allows you to search from thousands of healthy recipes to
+      <br />
+      keep your health journey on track and help you reach your goals.
       <br />
       <br />
       Start by simply typing an ingredient or cuisine and get to cooking!
@@ -81,72 +81,59 @@ const Food = () => {
             fontSize: '15px',
           }}
         />
-
-
         <Button
           variant="outlined"
           color="error"
           onClick={(e) => recipeData(e)}
-        >Yummy hunt</Button>
-
+        >
+          Yummy hunt
+        </Button>
       </div>
-      <div>
-        {recipe.map(recipe => (
-          <div>
-            <h1>{recipe.recipe.label}</h1>
-
-
-            <img src={recipe.recipe.image} alt={recipe.recipe.label} />
-
-
-            <h2>{recipe.recipe.cuisineType}</h2>
-
-
-            <ul>
-              {recipe.recipe.ingredients.map(ingredient => (
-                <li>{ingredient.text}</li>
-              ))}
-            </ul>
-
-
-            <p>{Math.round(recipe.recipe.totalNutrients.ENERC_KCAL.quantity)} cal</p>
-
-
-            <p>Cook time: {recipe.recipe.totalTime} minute(s)</p>
-
-
-            <a href={recipe.recipe.url} target="_blank">Recipe</a>
-            <br />
-            <br />
-
-
-            <button
-              method="POST"
-              action="/food"
-              style={{
-                backgroundColor: 'lightgrey',
-                color: 'black',
-                padding: '10px 10px',
-                borderRadius: '5px',
-                border: '1px solid gray',
-                fontSize: '15px',
-                marginBottom: "15px"
-              }}
-            >Save to my Tracker 😋</button>
-
-
-
-          </div>
-
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', justifyContent: 'center' }}>
+        {recipe.map((recipe, index) => (
+          <Card key={index} style={{ width: '100%', height: '100%' }}>
+            <CardMedia
+              component="img"
+              height="200"
+              image={recipe.recipe.image}
+              alt={recipe.recipe.label}
+            />
+            <CardContent>
+              <Typography variant="h5" component="h2">
+                {recipe.recipe.label}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary">
+                {recipe.recipe.cuisineType}
+              </Typography>
+              <ul>
+                {recipe.recipe.ingredients.map((ingredient, index) => (
+                  <li key={index}>{ingredient.text}</li>
+                ))}
+              </ul>
+              <Typography variant="body1" color="text.secondary">
+                {Math.round(recipe.recipe.totalNutrients.ENERC_KCAL.quantity)} cal
+              </Typography>
+              <Typography variant="body1" color="text.secondary">
+                Cook time: {recipe.recipe.totalTime} minute(s)
+              </Typography>
+              <Button
+                variant="outlined"
+                color="error"
+                href={recipe.recipe.url}
+                target="_blank"
+                rel="noopener"
+              >
+                Recipe
+              </Button>
+            </CardContent>
+          </Card>
         ))}
       </div>
       <div>
         <img style={{ width: 1400, height: 800 }} src={cooking} alt="cooking" />
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-
-export default Food
+export default Food;

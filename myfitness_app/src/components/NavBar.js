@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Stack } from '@mui/material';
-import ExerciseDetail from '../Pages/ExerciseDetail';
-import Food from '../Pages/Food';
-import Tracker from '../Pages/Tracker';
 import logo from '../assets/logo.jpg'
 
 const NavBar = () => (
@@ -24,11 +21,11 @@ const NavBar = () => (
       </Link>
 
 
-      <Link to="/exercises" element={<ExerciseDetail />} style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Exercises</Link>
+      <Link to="/exercises" style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Exercises</Link>
 
-      <Link to="/recipes" element={<Food />} style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Food</Link>
+      <Link to="/recipes" style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Food</Link>
 
-      <Link to="/tracker" element={<Tracker />} style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Tracker</Link>
+      <Link to="/tracker" style={{ textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625', align: 'center' }}>Tracker</Link>
 
     </Stack>
   </Stack>

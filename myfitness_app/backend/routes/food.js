@@ -73,7 +73,7 @@ foodRouter.route('/').get((req, res) => {
 //Add route
 foodRouter.route('/add').post((req, res) => {
     const name = req.body.name;
-    const date = req.body.date;
+    const date = req.body.date
     const servingSize = req.body.servingSize;
     const calories = req.body.calories;
     const timeOfDay = req.body.timeOfDay;
@@ -102,7 +102,7 @@ foodRouter.route('/').get((req, res) => {
 // Create Route
 foodRouter.route('/add').post((req, res) => {
     const name = req.body.name;
-    const date = req.body.date;
+    const date = req.body
     const servingSize = req.body.servingSize;
     const calories = req.body.calories;
     const timeOfDay = req.body.timeOfDay;
@@ -110,7 +110,6 @@ foodRouter.route('/add').post((req, res) => {
 
     const newFood = new Food({
         name,
-        date,
         servingSize,
         calories,
         timeOfDay,

@@ -44,7 +44,6 @@ const ExerciseDetail = () => {
 									<img src={exercise.gifUrl} alt={exercise.name} />
 									<p>{exercise.target}</p>
 									<p>{exercise.equipment}</p>
-									<button>Save</button>
 								</div>
 							</Grid>
 						))}

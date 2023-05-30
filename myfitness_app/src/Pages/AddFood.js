@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, InputAdornment } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
-import MaskedInput from 'react-text-mask';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
@@ -10,26 +9,26 @@ const AddFood = () => {
 
     const navigate = useNavigate();
 
+    const [selectedDate, setSelectedDate] = useState(null);
     const [date, setDate] = useState('')
 
-    const [selectedDate, setSelectedDate] = useState(null);
-
     const handleDateChange = (date) => {
-        setSelectedDate(date)
+        setSelectedDate(date);
+        setDate(date ? date.toISOString().slice(0, 10) : '');
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const form = event.target;
-        const formData = new FormData(form);
+
         const data = {
-            name: formData.get('name'),
-            date: formData.get('date'),
-            servingSize: formData.get('servingSize'),
-            calories: formData.get('calories'),
-            timeOfDay: formData.get('timeOfDay'),
-            mood: formData.get('mood')
+            name: event.target.name.value,
+            date: selectedDate, // Use the selectedDate state instead
+            servingSize: event.target.servingSize.value,
+            calories: event.target.calories.value,
+            timeOfDay: event.target.timeOfDay.value,
+            mood: event.target.mood.value
         };
+
         fetch('http://localhost:3000/food/add', {
             method: 'POST',
             headers: {
@@ -52,28 +51,25 @@ const AddFood = () => {
             });
     };
 
-    const DateInputComponent = (props) => {
-        const { inputRef, ...other } = props;
-        return (
-            <MaskedInput
-                {...other}
-                ref={(ref) => {
-                    inputRef(ref ? ref.inputElement : null);
-                }}
-                mask={[/\d/, /\d/, /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/]}
-                placeholderChar={'\u2000'}
-            />
-        )
-    }
-
     return (
         <div style={{ padding: "50px" }}>
             <h3>Add a meal</h3>
             <form onSubmit={handleSubmit}>
-                {/* ...other form fields... */}
+                <p><em>Fields with * are required</em></p>
+                <TextField
+                    type='text'
+                    name='name'
+                    id="name"
+                    label="Name"
+                    variant='standard'
+                    sx={{ width: '230px', height: '56px' }}
+                    required
+                />
+                <br />
+                <br />
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
-                        label="Date (YYYY/MM/DD)"
+                        label="Date"
                         value={selectedDate}
                         onChange={handleDateChange}
                         renderInput={(params) => (
@@ -90,6 +86,8 @@ const AddFood = () => {
                                         </InputAdornment>
                                     ),
                                 }}
+                                value={selectedDate ? selectedDate.toISOString().slice(0, 10) : ''}
+                                sx={{ width: '200px', height: '56px' }}
                             />
                         )}
                     />
@@ -101,6 +99,7 @@ const AddFood = () => {
                     id="servingSize"
                     label="Serving(s)"
                     variant='standard'
+                    sx={{ width: '230px', height: '56px' }}
                     required
                 />
                 <br />
@@ -110,6 +109,7 @@ const AddFood = () => {
                     id="calories"
                     label="Calories"
                     variant='standard'
+                    sx={{ width: '230px', height: '56px' }}
                 />
                 <br />
                 <TextField
@@ -118,6 +118,7 @@ const AddFood = () => {
                     id="timeOfDay"
                     label="Time of day"
                     variant='standard'
+                    sx={{ width: '230px', height: '56px' }}
                 />
                 <br />
                 <TextField
@@ -126,10 +127,11 @@ const AddFood = () => {
                     id="mood"
                     label="Mood"
                     variant='standard'
+                    sx={{ width: '230px', height: '56px' }}
                 />
                 <br />
                 <br />
-                <Button variant="outlined" color="error" type='submit'>Add Food</Button>
+                <Button sx={{ width: '230px', height: '56px' }} variant="outlined" color="error" type='submit'>Add Food</Button>
             </form>
         </div >
     );
