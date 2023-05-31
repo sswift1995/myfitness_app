@@ -65,14 +65,23 @@ const Tracker = () => {
   const sortedExercises = [...exercises].sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
-    <div>
-      <Box display="flex" justifyContent="space-between" marginBottom="20px">
-        <div>
+    <div className="background-container" style={{
+      fontSize: '20px',
+      textAlign: 'center',
+    }}>
+      Workout &nbsp; ✔️ &nbsp; Meal &nbsp; ✔️
+      <br />
+      <br />
+      Now let's track your progress by adding your workout and meal to the tracker below.
+      <br />
+      <br />
+      <Box display="flex" justifyContent="center" margin="20px">
+        <div style={{ margin: '0 20px' }}>
           <Link to="/foods/add">
             <Button variant="outlined" color="error">Add Food</Button>
           </Link>
         </div>
-        <div>
+        <div style={{ margin: '0 20px' }}>
           <Link to="/exercises/add">
             <Button variant="outlined" color="error">Add Exercise</Button>
           </Link>

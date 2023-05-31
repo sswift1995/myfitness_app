@@ -22,7 +22,7 @@ const AddFood = () => {
 
         const data = {
             name: event.target.name.value,
-            date: selectedDate, // Use the selectedDate state instead
+            date: selectedDate, // Selected date state (line 12)
             servingSize: event.target.servingSize.value,
             calories: event.target.calories.value,
             timeOfDay: event.target.timeOfDay.value,

@@ -52,21 +52,18 @@ const Food = () => {
   return (
     <div style={{
       padding: '10px',
-      fontSize: '30px',
+      fontSize: '20px',
       textAlign: 'center',
       marginTop: '20px',
       marginBottom: '20px',
-      maxWidth: '1200px'
     }}>
-      Fit by Me allows you to search from thousands of healthy recipes to
-      <br />
-      keep your health journey on track and help you reach your goals.
+      Search from thousands of healthy recipes to keep your wellness journey on track and help you reach your goals.
       <br />
       <br />
       Start by simply typing an ingredient or cuisine and get to cooking!
       <br />
       <br />
-      ⭐ Pro tip: If you love the recipe don't forget to add it to your tracker ⭐
+      ⭐ Don't forget to add your meal to the tracker ⭐
       <div>
         <input
           type='text'
@@ -130,7 +127,7 @@ const Food = () => {
         ))}
       </div>
       <div>
-        <img style={{ width: 1400, height: 800 }} src={cooking} alt="cooking" />
+        <img style={{ width: 1000, height: 600, padding: '20px' }} src={cooking} alt="cooking" />
       </div>
     </div>
   );
