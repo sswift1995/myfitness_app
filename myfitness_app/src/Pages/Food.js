@@ -51,22 +51,20 @@ const Food = () => {
   return (
     <div style={{
       padding: '10px',
-      fontSize: '30px',
+      fontSize: '20px',
       textAlign: 'center',
       marginTop: '20px',
       marginBottom: '20px',
-      maxWidth: '1200px'
+      
     }}>
-      Fit by Me allows you to search from thousands of
-      healthy recipes to <br />
-      keep your
-      health journey on track and help you reach your goals.
-      <br />
-      <br />
-      Start by simply typing an ingredient or cuisine and get to cooking!
-      <br />
-      <br />
-      ⭐ Pro tip: If you love the recipe don't forget to add it to your tracker ⭐
+Search from thousands of healthy recipes to keep your wellness journey on track and help you reach your goals.
+<br/>
+<br/>
+Start by simply typing an ingredient or cuisine and get to cooking!
+<br/>
+<br/>
+⭐ Don't forget to add your meal to the tracker ⭐
+
       <div>
         <input
           type='text'
@@ -74,10 +72,12 @@ const Food = () => {
           placeholder='Search for a recipe'
           onChange={(e) => handleChange(e)}
           style={{
-            padding: '10px',
+            padding: '12px',
             borderRadius: '5px',
-            border: '1px solid gray',
-            margin: '30px',
+            border: '1px solid red',
+            marginTop: '40px',
+            marginBottom: '40px',
+            margin: '10px',
             fontSize: '15px',
           }}
         />
@@ -86,6 +86,7 @@ const Food = () => {
         <Button
           variant="outlined"
           color="error"
+          size="large"
           onClick={(e) => recipeData(e)}
         >Yummy hunt</Button>
 
@@ -115,33 +116,18 @@ const Food = () => {
             <p>Cook time: {recipe.recipe.totalTime} minute(s)</p>
 
 
-            <a href={recipe.recipe.url} target="_blank">Recipe</a>
+            <a href={recipe.recipe.url} target="_blank" style={{ color: 'red', textDecoration: 'underline' }}>
+  Recipe
+</a>
             <br />
             <br />
-
-
-            <button
-              method="POST"
-              action="/food"
-              style={{
-                backgroundColor: 'lightgrey',
-                color: 'black',
-                padding: '10px 10px',
-                borderRadius: '5px',
-                border: '1px solid gray',
-                fontSize: '15px',
-                marginBottom: "15px"
-              }}
-            >Save to my Tracker 😋</button>
-
-
 
           </div>
 
         ))}
       </div>
       <div>
-        <img style={{ width: 1400, height: 800 }} src={cooking} alt="cooking" />
+       <img style={{ width: 1000, height: 600, padding: '20px' }} src={cooking} alt="cooking" />
 
       </div>
     </div>
