@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Grid, Box } from '@mui/material';
+import exercise from '../assets/exercise.png';
+
 
 const ExerciseDetail = () => {
 
@@ -28,10 +30,19 @@ const ExerciseDetail = () => {
 	}
 
 	return (
-		<Box display="flex" flexDirection="column" alignItems="center">
+		<div style={{
+			fontSize: '20px',
+			textAlign: 'center',
+		  }}>
+			Ready to begin your journey? Let’s break a sweat! Hundreds of exercises are just a click away!
+			<br/>
+			<br/>
+			⭐ Don't forget to add your workout to the tracker ⭐
+		<Box display="flex" flexDirection="column" alignItems="center" style={{ padding: '20px' }}>
 			<Button variant="outlined" color="error" onClick={exerciseData}>
 				Search for Exercises
 			</Button>
+			<img style={{ width: 1000, height: 600, padding: '20px' }} src={exercise} alt="Home" />
 
 			{/* Render the fetched exercise data */}
 			<Box mt={2} display="flex" justifyContent="center">
@@ -50,7 +61,9 @@ const ExerciseDetail = () => {
 					</Grid>
 				</Box>
 			</Box>
+			
 		</Box>
+		</div>
 	);
 };
 
