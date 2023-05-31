@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import { TextField, Button, InputAdornment } from '@mui/material';
+import EventIcon from '@mui/icons-material/Event';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const UpdateFood = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+
+    const [selectedDate, setSelectedDate] = useState('');
 
     const [food, setFood] = useState({
         name: '',
@@ -14,6 +19,30 @@ const UpdateFood = () => {
         timeOfDay: '',
         mood: ''
     });
+
+    const handleNameChange = (event) => {
+        const { value } = event.target;
+        setFood((prevFood) => ({
+            ...prevFood,
+            name: value,
+        }));
+    };
+
+    const handleDateChange = (date) => {
+        const selectedDateWithoutTime = date ? new Date(date.getFullYear(), date.getMonth(), date.getDate()) : null;
+        setSelectedDate(selectedDateWithoutTime);
+        setFood((prevFood) => ({
+            ...prevFood,
+            date: selectedDateWithoutTime ? selectedDateWithoutTime.toISOString() : '',
+        }));
+    };
+
+    const handleChange = (event) => {
+        setFood((prevFood) => ({
+            ...prevFood,
+            [event.target.name]: event.target.value,
+        }));
+    };
 
     useEffect(() => {
         console.log('Food ID: ', id)
@@ -52,13 +81,6 @@ const UpdateFood = () => {
         navigate('/tracker')
     };
 
-    const handleChange = (event) => {
-        setFood((prevFood) => ({
-            ...prevFood,
-            [event.target.name]: event.target.value,
-        }));
-    };
-
     return (
         <div style={{ padding: '50px' }}>
             <h3>Edit a meal</h3>
@@ -72,21 +94,38 @@ const UpdateFood = () => {
                     id="name"
                     label="Name"
                     variant="standard"
+                    sx={{ width: '230px', height: '56px' }}
                     required
                     value={food.name}
-                    onChange={handleChange}
+                    onChange={handleNameChange}
                 />
                 <br />
-                <TextField
-                    type="text"
-                    name="date"
-                    id="date"
-                    label="Date"
-                    variant="standard"
-                    required
-                    value={food.date}
-                    onChange={handleChange}
-                />
+                <br />
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                        label="Date"
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                name="date"
+                                id="date"
+                                variant="standard"
+                                required
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <EventIcon />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                value={selectedDate ? selectedDate.toISOString().slice(0, 10) : ''}
+                                sx={{ width: '200px', height: '56px' }}
+                            />
+                        )}
+                    />
+                </LocalizationProvider>
                 <br />
                 <TextField
                     type="text"
@@ -94,6 +133,7 @@ const UpdateFood = () => {
                     id="servingSize"
                     label="Serving(s)"
                     variant="standard"
+                    sx={{ width: '230px', height: '56px' }}
                     required
                     value={food.servingSize}
                     onChange={handleChange}
@@ -105,6 +145,7 @@ const UpdateFood = () => {
                     id="calories"
                     label="Calories"
                     variant="standard"
+                    sx={{ width: '230px', height: '56px' }}
                     value={food.calories}
                     onChange={handleChange}
                 />
@@ -115,6 +156,7 @@ const UpdateFood = () => {
                     id="timeOfDay"
                     label="Time of day"
                     variant="standard"
+                    sx={{ width: '230px', height: '56px' }}
                     value={food.timeOfDay}
                     onChange={handleChange}
                 />
@@ -125,13 +167,14 @@ const UpdateFood = () => {
                     id="mood"
                     label="Mood"
                     variant="standard"
+                    sx={{ width: '230px', height: '56px' }}
                     value={food.mood}
                     onChange={handleChange}
                 />
                 <br />
                 <br />
-                <Button variant="outlined" color="error" type="submit">
-                    Add Meal
+                <Button sx={{ width: '230px', height: '56px' }} variant="outlined" color="error" type="submit">
+                    Edit Meal
                 </Button>
             </form>
         </div>

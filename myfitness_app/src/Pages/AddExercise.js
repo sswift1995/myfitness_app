@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, InputAdornment } from '@mui/material';
+import EventIcon from '@mui/icons-material/Event';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const AddExercise = () => {
 
   const navigate = useNavigate();
 
+  const [selectedDate, setSelectedDate] = useState(null);
   const [date, setDate] = useState('')
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setDate(date ? date.toISOString().slice(0, 10) : '');
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const form = event.target;
-    const formData = new FormData(form);
-
     const data = {
-      name: formData.get('name'),
-      date: formData.get('date'),
-      duration: formData.get('duration'),
-      sets: formData.get('sets'),
-      reps: formData.get('reps'),
-      mood: formData.get('mood')
+      name: event.target.name.value,
+      date: selectedDate, // Use the selectedDate state instead
+      duration: event.target.duration.value,
+      sets: event.target.sets.value,
+      reps: event.target.reps.value,
+      mood: event.target.mood.value
     };
 
     fetch('http://localhost:3000/exercises/add', {
@@ -45,15 +51,6 @@ const AddExercise = () => {
       });
   };
 
-  const handleDateChange = (event) => {
-    const inputDate = event.target.value;
-    // Remove slashes from input date
-    const formattedDate = inputDate.replace(/\//g, '');
-    // Add slashes to the formatted date
-    const displayDate = formattedDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1/$2/$3');
-    setDate(displayDate);
-  };
-
   return (
     <div style={{ padding: "50px" }}>
       <h3>Add an exercise</h3>
@@ -68,16 +65,32 @@ const AddExercise = () => {
           required
         />
         <br />
-        <TextField
-          type='text'
-          name='date'
-          id='date'
-          label='Date (YYYY/MM/DD)'
-          variant='standard'
-          value={date}
-          onChange={handleDateChange}
-          required
-        />
+        <br />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Date"
+            value={selectedDate}
+            onChange={handleDateChange}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                name="date"
+                id="date"
+                variant="standard"
+                required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <EventIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                value={selectedDate ? selectedDate.toISOString().slice(0, 10) : ''}
+                sx={{ width: '200px', height: '56px' }}
+              />
+            )}
+          />
+        </LocalizationProvider>
         <br />
         <TextField
           type='text'
@@ -85,6 +98,7 @@ const AddExercise = () => {
           id='duration'
           label='Duration'
           variant='standard'
+          sx={{ width: '230px', height: '56px' }}
           required
         />
         <br />
@@ -94,6 +108,7 @@ const AddExercise = () => {
           id='sets'
           label='Sets'
           variant='standard'
+          sx={{ width: '230px', height: '56px' }}
         />
         <br />
         <TextField
@@ -102,6 +117,7 @@ const AddExercise = () => {
           id='reps'
           label='Reps'
           variant='standard'
+          sx={{ width: '230px', height: '56px' }}
         />
         <br />
         <TextField
@@ -110,10 +126,11 @@ const AddExercise = () => {
           id='mood'
           label='Mood'
           variant='standard'
+          sx={{ width: '230px', height: '56px' }}
         />
         <br />
         <br />
-        <Button variant="outlined" color="error" type='submit'>Add Exercise</Button>
+        <Button sx={{ width: '230px', height: '56px' }} variant="outlined" color="error" type='submit'>Add Exercise</Button>
       </form>
     </div>
   );

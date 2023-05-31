@@ -57,7 +57,18 @@ const Tracker = () => {
       .catch(error => console.log('Error fetching exercise data: ', error));
   }, []);
 
+  // Sort the foods array by date in ascending order
+  const sortedFoods = [...foods].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  // Sort the exercises array by date in ascending order
+  const sortedExercises = [...exercises].sort((a, b) => new Date(a.date) - new Date(b.date));
+
   return (
+ TrackerExercisesFood
+    <div>
+      <Box display="flex" justifyContent="space-between" marginBottom="20px">
+        <div>
+
    
     <div className="background-container" style={{
       fontSize: '20px',
@@ -69,6 +80,7 @@ const Tracker = () => {
       Now let's track your progress by adding your workout and meal to the tracker below. 
       <Box display="flex" justifyContent="center" margin="20px">
       <div style={{ margin: '0 20px' }}>
+
           <Link to="/foods/add">
             <Button variant="outlined" color="error">Add Food</Button>
           </Link>
@@ -81,76 +93,65 @@ const Tracker = () => {
       </Box>
 
       <Grid container spacing={4}>
-
         <Grid item xs={12} sm={6}>
           <div style={{ padding: "20px" }}>
             <Typography variant="h4" component="h1" gutterBottom>Food</Typography>
-
-            {/* Render the food data */}
-            {foods.map(food => (
-              <Box key={food.id} marginBottom="20px">
-                <Typography variant="h5" component="h2">{food.name}</Typography>
-                <Typography>Date: {formatDate(food.date)}</Typography>
-                <Typography>Serving(s): {food.servingSize}</Typography>
-                <Typography>Calories: {food.calories}</Typography>
-                <Typography>Time of day: {food.timeOfDay}</Typography>
-                <Typography>Mood: {food.mood}</Typography>
-
-                {/* Update button */}
-                <Button
-                  size='small'
-                  color="error"
-                  type='submit'
-                  onClick={() => handleDelete('food', food.id)}
-                >
-                  Delete
-                </Button>
-
-                {/* Edit button */}
-                <Link to={`/food/edit/${food.id}`}>
-                  <Button size='small' color="error">Edit</Button>
-                </Link>
-
-              </Box>
-            ))}
+            <Grid container spacing={2}>
+              {sortedFoods.map(food => (
+                <Grid item xs={12} sm={4} key={food.id}>
+                  <Box marginBottom="20px">
+                    <Typography variant="h5" component="h2">{food.name}</Typography>
+                    <Typography>Date: {formatDate(food.date)}</Typography>
+                    <Typography>Serving(s): {food.servingSize}</Typography>
+                    <Typography>Calories: {food.calories}</Typography>
+                    <Typography>Time of day: {food.timeOfDay}</Typography>
+                    <Typography>Mood: {food.mood}</Typography>
+                    <Button
+                      size='small'
+                      color="error"
+                      type='submit'
+                      onClick={() => handleDelete('food', food.id)}
+                    >
+                      Delete
+                    </Button>
+                    <Link to={`/food/edit/${food.id}`}>
+                      <Button size='small' color="error">Edit</Button>
+                    </Link>
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
           </div>
-
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <div style={{ padding: "20px" }}>
             <Typography variant="h4" component="h1" gutterBottom>Exercises</Typography>
-
-            {/* Render the exercise data */}
-            {exercises.map(exercise => {
-              console.log(exercise)
-              return (
-                <Box key={exercise.id} marginBottom="20px">
-                  <Typography variant="h5" component="h2">{exercise.name}</Typography>
-                  <Typography>Date: {formatDate(exercise.date)}</Typography>
-                  <Typography>Duration: {exercise.duration} minutes</Typography>
-                  <Typography>Sets: {exercise.sets}</Typography>
-                  <Typography>Reps: {exercise.reps}</Typography>
-                  <Typography>Mood: {exercise.mood}</Typography>
-
-                  {/* Delete button */}
-                  <Button
-                    size='small'
-                    color="error"
-                    type='submit'
-                    onClick={() => handleDelete('exercise', exercise.id)}
-                  >
-                    Delete
-                  </Button>
-
-                  {/* Edit button */}
-                  <Link to={`/exercise/edit/${exercise.id}`}>
-                    <Button size='small' color="error">Edit</Button>
-                  </Link>
-
-                </Box>
-              );
-            })}
+            <Grid container spacing={2}>
+              {sortedExercises.map(exercise => (
+                <Grid item xs={12} sm={4} key={exercise.id}>
+                  <Box marginBottom="20px">
+                    <Typography variant="h5" component="h2">{exercise.name}</Typography>
+                    <Typography>Date: {formatDate(exercise.date)}</Typography>
+                    <Typography>Duration: {exercise.duration} minutes</Typography>
+                    <Typography>Sets: {exercise.sets}</Typography>
+                    <Typography>Reps: {exercise.reps}</Typography>
+                    <Typography>Mood: {exercise.mood}</Typography>
+                    <Button
+                      size='small'
+                      color="error"
+                      type='submit'
+                      onClick={() => handleDelete('exercise', exercise.id)}
+                    >
+                      Delete
+                    </Button>
+                    <Link to={`/exercise/edit/${exercise.id}`}>
+                      <Button size='small' color="error">Edit</Button>
+                    </Link>
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
           </div>
         </Grid>
       </Grid>
