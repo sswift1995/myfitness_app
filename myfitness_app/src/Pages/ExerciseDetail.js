@@ -26,7 +26,7 @@ const ExerciseDetail = () => {
 		} catch (error) {
 			console.error(error);
 		}
-	}
+	};
 
 	return (
 		<div style={{

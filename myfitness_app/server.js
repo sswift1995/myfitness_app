@@ -17,7 +17,6 @@ const uri = "mongodb+srv://jeremylehmann06:NoNv0dG4v4BZjVzV@jeremy.vyiklkn.mongo
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to MongoDB');
-        // Your remaining code here
     })
     .catch((error) => {
         console.error('Error connecting to MongoDB:', error);
@@ -30,7 +29,7 @@ const exercisesRouter = require('./backend/routes/exercises')
 app.use('/exercises', exercisesRouter);
 app.use('/food', foodRouter);
 
-//end of code that Jeff entered
+//Jeff entered this code
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
