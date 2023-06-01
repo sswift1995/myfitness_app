@@ -33,7 +33,7 @@ const ExerciseDetail = () => {
 			fontSize: '20px',
 			textAlign: 'center',
 		}}>
-			Ready to begin your journey? Let’s break a sweat! Hundreds of exercises are just a click away!
+			Ready to begin your journey? Let's break a sweat! Hundreds of exercises are just a click away!
 			<br />
 			<br />
 			⭐ Don't forget to add your workout to the tracker ⭐

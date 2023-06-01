@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './Foot.css';
 import logo2 from '../assets/logo2.jpg'
