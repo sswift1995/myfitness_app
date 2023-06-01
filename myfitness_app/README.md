@@ -4,7 +4,6 @@ The technologies used to build the app include: React, JavaScript, HTML, CSS, an
 
 The app is fully functional. The app can be enhanced additionally by adding a goal route for the user to track their progress.
 
-
 Contributed By:
 Syrinthia Swift
 Jasmina Topalovic

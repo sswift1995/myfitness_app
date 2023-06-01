@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Tracker.css';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Box, Typography, Grid } from '@mui/material';
 
@@ -64,23 +65,18 @@ const Tracker = () => {
   const sortedExercises = [...exercises].sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
- TrackerExercisesFood
-    <div>
-      <Box display="flex" justifyContent="space-between" marginBottom="20px">
-        <div>
-
-   
     <div className="background-container" style={{
       fontSize: '20px',
       textAlign: 'center',
     }}>
-      Workout 🗸 Meal 🗸
-      <br/>
-      <br/>
-      Now let's track your progress by adding your workout and meal to the tracker below. 
+      Workout &nbsp; ✔️ &nbsp; Meal &nbsp; ✔️
+      <br />
+      <br />
+      Now let's track your progress by adding your workout and meal to the tracker below.
+      <br />
+      <br />
       <Box display="flex" justifyContent="center" margin="20px">
-      <div style={{ margin: '0 20px' }}>
-
+        <div style={{ margin: '0 20px' }}>
           <Link to="/foods/add">
             <Button variant="outlined" color="error">Add Food</Button>
           </Link>
@@ -94,7 +90,7 @@ const Tracker = () => {
 
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
-          <div style={{ padding: "20px" }}>
+          <div style={{ padding: "50px" }}>
             <Typography variant="h4" component="h1" gutterBottom>Food</Typography>
             <Grid container spacing={2}>
               {sortedFoods.map(food => (
@@ -125,7 +121,7 @@ const Tracker = () => {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <div style={{ padding: "20px" }}>
+          <div style={{ padding: "50px" }}>
             <Typography variant="h4" component="h1" gutterBottom>Exercises</Typography>
             <Grid container spacing={2}>
               {sortedExercises.map(exercise => (
@@ -156,8 +152,6 @@ const Tracker = () => {
         </Grid>
       </Grid>
     </div>
-  
-
   );
 }
 

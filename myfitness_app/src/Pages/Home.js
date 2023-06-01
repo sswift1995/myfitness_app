@@ -1,10 +1,6 @@
 import React from 'react'
 import pageone from '../assets/pageone.png';
-
-
 const Home = () => {
-
-
   return (
     <div style={{
       fontSize: '20px',

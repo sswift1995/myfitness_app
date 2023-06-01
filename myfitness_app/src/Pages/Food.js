@@ -56,27 +56,14 @@ const Food = () => {
       textAlign: 'center',
       marginTop: '20px',
       marginBottom: '20px',
-      
     }}>
- TrackerExercisesFood
-      Fit by Me allows you to search from thousands of healthy recipes to
-      <br />
-      keep your health journey on track and help you reach your goals.
+      Search from thousands of healthy recipes to keep your wellness journey on track and help you reach your goals.
       <br />
       <br />
       Start by simply typing an ingredient or cuisine and get to cooking!
       <br />
       <br />
-      ⭐ Pro tip: If you love the recipe don't forget to add it to your tracker ⭐
-
-Search from thousands of healthy recipes to keep your wellness journey on track and help you reach your goals.
-<br/>
-<br/>
-Start by simply typing an ingredient or cuisine and get to cooking!
-<br/>
-<br/>
-⭐ Don't forget to add your meal to the tracker ⭐
-
+      ⭐ Don't forget to add your meal to the tracker ⭐
       <div>
         <input
           type='text'
@@ -84,25 +71,21 @@ Start by simply typing an ingredient or cuisine and get to cooking!
           placeholder='Search for a recipe'
           onChange={(e) => handleChange(e)}
           style={{
-            padding: '12px',
+            padding: '10px',
             borderRadius: '5px',
-            border: '1px solid red',
-            marginTop: '40px',
-            marginBottom: '40px',
-            margin: '10px',
+            border: '1px solid gray',
+            margin: '30px',
             fontSize: '15px',
           }}
         />
         <Button
           variant="outlined"
           color="error"
-          size="large"
           onClick={(e) => recipeData(e)}
         >
           Yummy hunt
         </Button>
       </div>
-TrackerExercisesFood
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', justifyContent: 'center' }}>
         {recipe.map((recipe, index) => (
           <Card key={index} style={{ width: '100%', height: '100%' }}>
@@ -144,46 +127,7 @@ TrackerExercisesFood
         ))}
       </div>
       <div>
-        <img style={{ width: 1400, height: 800 }} src={cooking} alt="cooking" />
-
-      <div>
-        {recipe.map(recipe => (
-          <div>
-            <h1>{recipe.recipe.label}</h1>
-
-
-            <img src={recipe.recipe.image} alt={recipe.recipe.label} />
-
-
-            <h2>{recipe.recipe.cuisineType}</h2>
-
-
-            <ul>
-              {recipe.recipe.ingredients.map(ingredient => (
-                <li>{ingredient.text}</li>
-              ))}
-            </ul>
-
-
-            <p>{Math.round(recipe.recipe.totalNutrients.ENERC_KCAL.quantity)} cal</p>
-
-
-            <p>Cook time: {recipe.recipe.totalTime} minute(s)</p>
-
-
-            <a href={recipe.recipe.url} target="_blank" style={{ color: 'red', textDecoration: 'underline' }}>
-  Recipe
-</a>
-            <br />
-            <br />
-
-          </div>
-
-        ))}
-      </div>
-      <div>
-       <img style={{ width: 1000, height: 600, padding: '20px' }} src={cooking} alt="cooking" />
-
+        <img style={{ width: 1000, height: 600, padding: '20px' }} src={cooking} alt="cooking" />
       </div>
     </div>
   );

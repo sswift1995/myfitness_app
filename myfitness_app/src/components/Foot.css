@@ -4,27 +4,21 @@
   margin-bottom: 20px;
   font-family: 'Alegreya SC';
   font-size: 18px;
-
 }
-
 .footer-social-media__icon .fa {
   display: flex;
   margin: 4px 4px 4px 4px;
   width: 25px;
   height: 25px;
   padding: 3px;
-  background: #d10505;
+  background: #D10505;
   color: white;
-
-
 }
-
 .footer-info {
   display: flex;
   justify-content: space-between;
 }
-
-.footer-info-center { 
+.footer-info-center {
   font-family: 'Alegreya SC';
   font-size: '22px';
   align-items: center;
@@ -32,9 +26,6 @@
   text-align: center;
   padding-top: 3%;
 }
-
-
-
 .footer-seperator {
   flex-grow: 1;
   border: none;
@@ -42,9 +33,7 @@
   background-color: gray;
   width: 100%;
 }
-
 .logo {
   display: flex;
   justify-content: left;
-
 }
