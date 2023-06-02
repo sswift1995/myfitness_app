@@ -1,12 +1,23 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override')
 
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Middleware
+app.use(methodOverride('_method'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
+// Set view engine and views directory
+app.set('view engine', 'jsx');
+app.set('views', __dirname + '/views');
+// app.engine('jsx', require('express-react-views').createEngine());
 
 app.use(cors());
 app.use(express.json());
