@@ -46,7 +46,7 @@ const UpdateFood = () => {
 
     useEffect(() => {
         console.log('Food ID: ', id)
-        fetch(`http://localhost:3000/food/${id}`, {
+        fetch(`https://desolate-meadow-45244.herokuapp.com/food/${id}`, {
             method: 'GET',
         })
             .then(response => response.json())
@@ -61,7 +61,7 @@ const UpdateFood = () => {
 
         const UpdatedFood = { ...food, id: id };
 
-        fetch(`http://localhost:3000/food/${id}`, {
+        fetch(`https://desolate-meadow-45244.herokuapp.com/food/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

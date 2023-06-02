@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Box, Typography, Grid } from '@mui/material';
 
-
 const Tracker = () => {
 
   const [foods, setFoods] = useState([]);
@@ -22,8 +21,8 @@ const Tracker = () => {
     console.log('Deleting ', type, 'with id: ', itemId)
 
     const url = type === 'exercise'
-      ? `http://localhost:3000/exercises/${itemId}`
-      : `http://localhost:3000/food/${itemId}`;
+      ? `https://desolate-meadow-45244.herokuapp.com/exercises/${itemId}`
+      : `https://desolate-meadow-45244.herokuapp.com/food/${itemId}`;
 
     fetch(url, { method: 'DELETE' })
       .then(response => {
@@ -42,14 +41,14 @@ const Tracker = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:3000/food')
+    fetch('https://desolate-meadow-45244.herokuapp.com/food')
       .then(response => response.json())
       .then(data => setFoods(
         data.map(food => ({ ...food, id: food._id }))
       ))
       .catch(error => console.log('Error fetching food data: ', error));
 
-    fetch('http://localhost:3000/exercises')
+    fetch('https://desolate-meadow-45244.herokuapp.com/exercises')
       .then(response => response.json())
       .then(data => setExercises(
         data.map(exercise => ({ ...exercise, id: exercise._id }))

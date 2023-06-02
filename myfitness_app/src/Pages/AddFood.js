@@ -29,7 +29,7 @@ const AddFood = () => {
             mood: event.target.mood.value
         };
 
-        fetch('http://localhost:3000/food/add', {
+        fetch('https://desolate-meadow-45244.herokuapp.com/food/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
