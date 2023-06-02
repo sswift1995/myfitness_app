@@ -29,7 +29,7 @@ const AddExercise = () => {
       mood: event.target.mood.value
     };
 
-    fetch('http://localhost:3000/exercises/add', {
+    fetch('https://desolate-meadow-45244.herokuapp.com/exercises/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

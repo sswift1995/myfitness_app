@@ -39,6 +39,7 @@ const UpdateExercise = () => {
     }));
   };
 
+
   const handleChange = (event) => {
     setExercise((prevExercise) => ({
       ...prevExercise,
@@ -48,7 +49,7 @@ const UpdateExercise = () => {
 
   useEffect(() => {
     console.log('Exercise ID: ', id)
-    fetch(`http://localhost:3000/exercises/${id}`, {
+    fetch(`https://desolate-meadow-45244.herokuapp.com/exercises/${id}`, {
       method: 'GET',
     })
       .then(response => response.json())
@@ -64,7 +65,7 @@ const UpdateExercise = () => {
 
     const UpdatedExercise = { ...exercise, id: id };
 
-    fetch(`http://localhost:3000/exercises/${id}`, {
+    fetch(`https://desolate-meadow-45244.herokuapp.com/exercises/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
