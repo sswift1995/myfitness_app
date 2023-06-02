@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './Tracker.css';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Box, Typography, Grid } from '@mui/material';
 
